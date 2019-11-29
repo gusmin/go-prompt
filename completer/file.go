@@ -8,7 +8,7 @@ import (
 	"runtime"
 
 	prompt "github.com/c-bata/go-prompt"
-	"github.com/c-bata/go-prompt/internal/debug"
+	"github.com/gusmin/go-prompt/internal/debug"
 )
 
 var (

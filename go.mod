@@ -1,6 +1,7 @@
-module github.com/c-bata/go-prompt
+module github.com/gusmin/go-prompt
 
 require (
+	github.com/c-bata/go-prompt v0.2.3
 	github.com/mattn/go-colorable v0.0.9
 	github.com/mattn/go-isatty v0.0.3 // indirect
 	github.com/mattn/go-runewidth v0.0.3
