@@ -29,6 +29,7 @@ type Suggest struct {
 
 // CompletionManager manages which suggestion is now selected.
 type CompletionManager struct {
+	displayed bool
 	selected  int // -1 means nothing one is selected.
 	tmp       []Suggest
 	max       uint16
@@ -76,6 +77,9 @@ func (c *CompletionManager) Previous() {
 		c.verticalScroll--
 	}
 	c.selected--
+	if c.selected < 0 {
+		c.selected = len(c.tmp) - 1
+	}
 	c.update()
 	return
 }
@@ -86,6 +90,9 @@ func (c *CompletionManager) Next() {
 		c.verticalScroll++
 	}
 	c.selected++
+	if c.selected >= len(c.tmp) {
+		c.selected = 0
+	}
 	c.update()
 	return
 }
@@ -93,6 +100,11 @@ func (c *CompletionManager) Next() {
 // Completing returns whether the CompletionManager selects something one.
 func (c *CompletionManager) Completing() bool {
 	return c.selected != -1
+}
+
+// Displaying returns whether the CompletionManager is displaying suggestions or not
+func (c *CompletionManager) Displaying() bool {
+	return c.displayed
 }
 
 func (c *CompletionManager) update() {

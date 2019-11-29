@@ -101,7 +101,8 @@ func (p *Prompt) feed(b []byte) (shouldExit bool, exec *Exec) {
 
 	// completion
 	completing := p.completion.Completing()
-	p.handleCompletionKeyBinding(key, completing)
+	displaying := p.completion.Displaying()
+	p.handleCompletionKeyBinding(key, completing, displaying)
 
 	switch key {
 	case Enter, ControlJ, ControlM:
@@ -145,10 +146,10 @@ func (p *Prompt) feed(b []byte) (shouldExit bool, exec *Exec) {
 	return
 }
 
-func (p *Prompt) handleCompletionKeyBinding(key Key, completing bool) {
+func (p *Prompt) handleCompletionKeyBinding(key Key, completing bool, displaying bool) {
 	switch key {
 	case Down:
-		if completing {
+		if displaying {
 			p.completion.Next()
 		}
 	case Tab, ControlI:

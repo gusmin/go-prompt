@@ -96,8 +96,10 @@ func (r *Render) renderWindowTooSmall() {
 func (r *Render) renderCompletion(buf *Buffer, completions *CompletionManager) {
 	suggestions := completions.GetSuggestions()
 	if len(completions.GetSuggestions()) == 0 {
+		completions.displayed = false
 		return
 	}
+	completions.displayed = true
 	prefix := r.getCurrentPrefix()
 	formatted, width := formatSuggestions(
 		suggestions,
